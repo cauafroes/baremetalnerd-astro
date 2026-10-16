@@ -1,11 +1,128 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+// src/pages/index.astro
+import Layout from "../layouts/Layout.astro";
+import SearchBox from "../components/SearchBox.astro"; // <--- Import it
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Fetch and sort recent posts recursively from ./blog/
+const postFiles = import.meta.glob("./blog/**/*.{md,mdx}", { eager: true });
+const posts = Object.values(postFiles);
+
+// Sort by date (newest first) and grab only the top 4
+const recentPosts = posts
+  .sort((a: any, b: any) => {
+    return (
+      new Date(b.frontmatter.date).getTime() -
+      new Date(a.frontmatter.date).getTime()
+    );
+  })
+  .slice(0, 4);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Home — BareMetalNerd">
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1 w-full min-w-0">
+    {/* Clean, Regular Intro Section */}
+    <section class="space-y-4 mb-16">
+      <div
+        class="inline-block px-3 py-1 rounded-md bg-monokai-surface text-monokai-green font-mono text-xs border border-monokai-comment/40"
+      >
+        $ status: online
+      </div>
+      <h1
+        class="text-3xl sm:text-4xl font-extrabold tracking-tight font-mono text-monokai-text"
+      >
+        Computer tinkering & linux ramblings.
+      </h1>
+      <p
+        class="text-monokai-comment text-base sm:text-lg max-w-2xl font-sans leading-relaxed"
+      >
+        Professionally staring at terminal logs, trying to figure out how to run
+        linux in my toaster, advocating for efficient systems and pretending to
+        know what I'm doing.
+      </p>
+    </section>
+
+    <SearchBox />
+
+    {/* Recent Posts Section with a subtle terminal command header */}
+    <section class="space-y-6">
+      <div
+        class="flex items-center justify-between border-b border-monokai-comment/30 pb-3"
+      >
+        <h2
+          class="text-sm sm:text-base font-mono text-monokai-cyan flex items-center gap-2"
+        >
+          <span class="text-monokai-red">&gt;</span> tail -n 4 ./recent_posts/
+        </h2>
+        <a
+          href="/blog"
+          class="text-xs font-mono text-monokai-comment hover:text-monokai-yellow transition-colors"
+        >
+          view_all →
+        </a>
+      </div>
+
+      {/* Dynamic Post Cards */}
+      <div class="space-y-4">
+        {
+          recentPosts.map((post: any) => (
+            <article class="p-4 sm:p-6 rounded-lg bg-monokai-dark border border-monokai-comment/20 hover:border-monokai-green/50 transition-all group min-w-0">
+              <a href={post.url} class="no-underline">
+                {/* File metadata row */}
+                <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-monokai-comment mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="text-monokai-purple">-rw-r--r--</span>
+                    {post.frontmatter.date && (
+                      <span class="text-monokai-yellow">
+                        {post.frontmatter.date}
+                      </span>
+                    )}
+                  </div>
+                  {post.frontmatter.category && (
+                    <span class="px-2 py-0.5 rounded bg-monokai-surface text-monokai-orange font-mono">
+                      [{post.frontmatter.category}]
+                    </span>
+                  )}
+                </div>
+
+                {/* Post Title */}
+                <h3 class="text-base sm:text-lg font-bold font-mono text-monokai-text group-hover:text-monokai-green transition-colors break-words">
+                  <span class="text-monokai-red mr-1.5">&gt;</span>
+                  {post.frontmatter.title}
+                </h3>
+
+                {/* Description */}
+                {post.frontmatter.description && (
+                  <p class="text-monokai-text/70 mt-2 text-xs sm:text-sm font-sans line-clamp-2">
+                    {post.frontmatter.description}
+                  </p>
+                )}
+
+                {/* Tags section */}
+                {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
+                  <div class="flex flex-wrap items-center gap-1.5 mt-3 pt-3 border-t border-monokai-comment/10">
+                    <span class="text-[10px] font-mono text-monokai-comment mr-1">
+                      tags:
+                    </span>
+                    {post.frontmatter.tags.map((tag: string) => (
+                      <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-monokai-surface text-monokai-cyan border border-monokai-comment/20">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </a>
+            </article>
+          ))
+        }
+
+        {
+          recentPosts.length === 0 && (
+            <div class="text-center py-12 text-monokai-comment font-mono">
+              $ tail: no blog posts found yet.
+            </div>
+          )
+        }
+      </div>
+    </section>
+  </main>
 </Layout>

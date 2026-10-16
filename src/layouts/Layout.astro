@@ -1,23 +1,60 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  title?: string;
+  frontmatter?: {
+    title?: string;
+    date?: string;
+    category?: string;
+    description?: string;
+  };
+}
+
+// Support titles coming from either standard Astro pages or Markdown frontmatter
+const { title, frontmatter } = Astro.props;
+const pageTitle = frontmatter?.title || title || "Blog";
+---
+<!doctype html>
+<html lang="en" class="bg-monokai-bg text-monokai-text antialiased">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{pageTitle}</title>
+    </head>
+    <body class="min-h-screen flex flex-col m-0 p-0 w-full overflow-x-hidden selection:bg-monokai-red selection:text-white">
+        <Navbar />
+
+        <main class="max-w-3xl w-full mx-auto px-4 sm:px-6 py-2 min-w-0 flex-1">
+            <article class="prose prose-invert max-w-none min-w-0 w-full">
+                
+                {/* Automatically render a blog header if frontmatter exists */}
+                {frontmatter && (
+                    <header class="not-prose mb-8 pb-6 border-b border-monokai-comment/30">
+                        <div class="flex items-center gap-3 text-xs font-mono text-monokai-comment mb-3">
+                            {frontmatter.date && <span>{frontmatter.date}</span>}
+                            {frontmatter.date && frontmatter.category && <span>•</span>}
+                            {frontmatter.category && <span class="text-monokai-orange">{frontmatter.category}</span>}
+                        </div>
+                        
+                        <h1 class="text-2xl sm:text-3xl font-bold font-mono text-monokai-text tracking-tight">
+                            <span class="text-monokai-red">&gt;</span> {frontmatter.title}
+                        </h1>
+
+                        {frontmatter.description && (
+                            <p class="text-monokai-text/70 text-sm mt-3 font-sans">
+                                {frontmatter.description}
+                            </p>
+                        )}
+                    </header>
+                )}
+
+                <slot />
+            </article>
+        </main>
+    </body>
+</html>

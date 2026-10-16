@@ -1,0 +1,18 @@
+---
+// src/components/Navbar.astro
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-monokai-comment/30 bg-monokai-bg/80 backdrop-blur-md transition-all">
+  <nav class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+    <!-- Logo / Brand -->
+     <a href="/" class="font-mono font-bold text-lg text-monokai-text tracking-tight hover:text-monokai-green active:text-monokai-green active:scale-95 transition-all">
+      <span class="text-monokai-red">&gt;</span> bare-metal<span class="text-monokai-cyan">.log</span>
+    </a>
+
+    <!-- Nav Links -->
+    <div class="flex items-center gap-6 font-mono text-sm">
+      <a href="/blog" class="text-monokai-text/80 hover:text-monokai-yellow active:text-monokai-yellow active:scale-95 transition-all">posts</a>
+      <a href="/about" class="text-monokai-text/80 hover:text-monokai-yellow active:text-monokai-yellow active:scale-95 transition-all transition-colors">about</a>
+    </div>
+  </nav>
+</header>
