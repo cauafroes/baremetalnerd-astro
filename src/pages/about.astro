@@ -1,37 +1,151 @@
 ---
-import Layout from '../layouts/Layout.astro';
+// src/pages/about.astro
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Home — BareMetalNerd">
-  <main class="max-w-4xl mx-auto px-6 py-10 flex-1 w-full">
-    <section class="space-y-4">
-      <h1 class="text-4xl font-extrabold tracking-tight font-mono text-monokai-text">
-        Engineering notes & system ramblings.
-      </h1>
-      <p class="text-monokai-comment text-lg max-w-2xl font-sans">
-        Exploring low-level systems, security engineering, and web development. Built with Astro and Tailwind.
-      </p>
-    </section>
-
-    <!-- Example post card list -->
-    <section class="mt-16 space-y-6">
-      <h2 class="text-xl font-mono text-monokai-cyan border-b border-monokai-comment/30 pb-2">
-        // recent_posts
-      </h2>
-
-      <article class="p-6 rounded-lg bg-monokai-dark border border-monokai-comment/20 hover:border-monokai-comment/60 transition-all group">
-        <div class="flex items-center gap-4 text-xs font-mono text-monokai-comment mb-2">
-          <span>2026-10-14</span>
-          <span>•</span>
-          <span class="text-monokai-orange">kernel</span>
+<Layout title="About — Monokai Blog">
+  <main
+    class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1 w-full min-w-0 space-y-10 font-mono"
+  >
+    {/* GNOME Terminal Window Header */}
+    <div
+      class="rounded-xl bg-monokai-dark border border-monokai-comment/30 overflow-hidden shadow-2xl"
+    >
+      <div
+        class="bg-monokai-surface/70 px-4 py-3 flex items-center justify-between border-b border-monokai-comment/20"
+      >
+        <span class="text-xs text-monokai-comment select-none">
+          bash — cat ~/about.txt
+        </span>
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-monokai-comment/50 inline-block"
+          ></span>
+          <span class="w-3 h-3 rounded-full bg-monokai-comment/50 inline-block"
+          ></span>
+          <span class="w-3 h-3 rounded-full bg-monokai-red inline-block"></span>
         </div>
-        <h3 class="text-lg font-bold font-mono text-monokai-text group-hover:text-monokai-green transition-colors">
-          <a href="#">Customizing Linux Window Managers & Status Bars</a>
-        </h3>
-        <p class="text-monokai-text/70 mt-2 text-sm">
-          A deep dive into configuring lightweight window managers and tuning scripts for minimal overhead.
+      </div>
+
+      <div
+        class="p-6 sm:p-8 space-y-6 text-sm sm:text-base text-monokai-text font-sans leading-relaxed"
+      >
+        {/* Intro Tag */}
+        <div
+          class="font-mono text-xs inline-block px-3 py-1 rounded bg-monokai-surface text-monokai-green border border-monokai-comment/40"
+        >
+          $ whoami
+        </div>
+
+        <h1
+          class="text-2xl sm:text-3xl font-extrabold tracking-tight font-mono text-monokai-text"
+        >
+          Fixing things that aren't broken, building things that probably
+          shouldn't exist.
+        </h1>
+
+        <p class="text-monokai-text/90">
+          Welcome to <strong class="text-monokai-cyan font-mono"
+            >Bare Metal Nerd</strong
+          >.
         </p>
-      </article>
-    </section>
+
+        <p class="text-monokai-text/90">
+          I’m Fróes — an information security analyst by day, and a chaotic
+          hardware/software tinkerer by heart. Have been breaking things for 15 years
+          when taking it apart to see how it ticks (and spend days trying fixing it
+          when it wouldn't work later).
+        </p>
+
+        {/* Section: The Stack / What I Do */}
+        <div class="space-y-4 pt-4 border-t border-monokai-comment/20">
+          <h2
+            class="text-lg font-mono text-monokai-yellow flex items-center gap-2"
+          >
+            <span class="text-monokai-red">&gt;</span> sys_specs & interests
+          </h2>
+
+          <ul
+            class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-mono text-monokai-text/80"
+          >
+            <li
+              class="p-3 rounded bg-monokai-surface/50 border border-monokai-comment/20 flex items-start gap-2"
+            >
+              <span class="text-monokai-green">•</span>
+              <div>
+                <strong class="text-monokai-text"
+                  >Microcontrollers & SBCs:</strong
+                > ESP32, Raspberry Pi, Milk-V Duo, and breathing new life into old
+                discarded hardware.
+              </div>
+            </li>
+            <li
+              class="p-3 rounded bg-monokai-surface/50 border border-monokai-comment/20 flex items-start gap-2"
+            >
+              <span class="text-monokai-green">•</span>
+              <div>
+                <strong class="text-monokai-text"
+                  >Linux & Custom Kernels:</strong
+                > Chroot on toasters and water bottles, wrestling with dotfiles, and optimization
+                rabbit holes.
+              </div>
+            </li>
+            <li
+              class="p-3 rounded bg-monokai-surface/50 border border-monokai-comment/20 flex items-start gap-2"
+            >
+              <span class="text-monokai-green">•</span>
+              <div>
+                <strong class="text-monokai-text">Cybersecurity:</strong> Defense
+                engineering, SOC log analysis, penetration testing, and analyzing
+                network traffic.
+              </div>
+            </li>
+            <li
+              class="p-3 rounded bg-monokai-surface/50 border border-monokai-comment/20 flex items-start gap-2"
+            >
+              <span class="text-monokai-green">•</span>
+              <div>
+                <strong class="text-monokai-text">Electronics & Bits:</strong> Soldering
+                custom gadgets, digital dashboards, analog circuits, and custom peripherals.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <p class="text-monokai-text/80">
+          This blog is essentially an unfiltered dump of my adventures,
+          documentation for projects that went off the rails, and notes on how
+          to keep ancient or unconventional tech running purely out of spite.
+        </p>
+
+        {/* Social Links Section */}
+        <div
+          class="space-y-3 pt-6 border-t border-monokai-comment/20 font-mono"
+        >
+          <div class="text-xs text-monokai-comment">
+            # connect / source code / professional background
+          </div>
+
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a
+              href="https://github.com/cauafroes"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-4 py-2.5 rounded-lg bg-monokai-surface hover:bg-monokai-comment/20 border border-monokai-comment/30 text-xs sm:text-sm text-monokai-cyan flex items-center gap-2 transition-all active:scale-95"
+            >
+              <span class="text-monokai-red">&gt;</span> github.com/cauafroes
+            </a>
+
+            <a
+              href="https://br.linkedin.com/in/caua-froes"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-4 py-2.5 rounded-lg bg-monokai-surface hover:bg-monokai-comment/20 border border-monokai-comment/30 text-xs sm:text-sm text-monokai-orange flex items-center gap-2 transition-all active:scale-95"
+            >
+              <span class="text-monokai-red">&gt;</span> linkedin.com/in/caua-froes
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 </Layout>
