@@ -14,7 +14,7 @@ By leveraging **`chroot`** (change root) on a rooted Android device, you can byp
 
 For this project we will be using an aging **Galaxy S8**, but you can use pretty much any phone.
 
-> [!NOTE]
+> [NOTE]
 > A lot of the technical material about chrooting via termux in this post is sourced from **[Ivon Blog](https://ivonblog.com)**. Check out their site for more projects.
 
 ---

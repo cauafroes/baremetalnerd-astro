@@ -34,7 +34,7 @@ Here are the three most common ways to bridge that communication:
    Great for low latency and decoupled physical setups, but it can be power-hungry. A typical setup involves running a lightweight HTTP or WebSocket server on an app in the phone (or via Termux), while the microcontroller sends requests over a local hotspot.
 
 2. **Bluetooth (Classic or BLE):** 
-   Useful when you want a wireless link without needing the phone to act as a full Wi-Fi access point. It takes a bit more work on the protocol side, but BLE is fairly power-efficient for low-bandwidth sensor data.
+   Useful when you want a wireless link without needing the phone or the microcontroller to act as a full Wi-Fi access point. It takes a bit more work on the protocol side, but BLE is fairly power-efficient for low-bandwidth sensor data.
 
 3. **Serial over USB (USB-OTG):** 
    This is the absolute low-bloatware, high-efficiency approach. By using a USB OTG cable, the phone can talk directly to a microcontroller via a serial interface (like UART over USB). It avoids firing up wireless radios entirely, cuts down on latency, and keeps CPU overhead minimal on both sides. The tradeoff? You'll need to write or configure a small Android background service or use Termux script hooks to open the serial port and parse incoming packets.
